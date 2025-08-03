@@ -19,6 +19,10 @@ app.use(cors());
 app.use(express.static('public'));
 app.use(express.json());
 
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "index.html"))
+})
+
 // Game state management
 const rooms = new Map();
 const waitingPlayers = [];
