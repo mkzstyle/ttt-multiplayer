@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multiplayer Tic Tac Toe</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="/socket.io/socket.io.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎮 Multiplayer Tic Tac Toe</h1>
+            <p class="subtitle">Play with friends or random opponents online!</p>
+        </header>
+
+        <!-- Name Setup Screen -->
+        <div id="nameScreen" class="screen active">
+            <div class="card">
+                <h2>Enter Your Name</h2>
+                <div class="input-group">
+                    <input type="text" id="playerName" placeholder="Your name..." maxlength="20">
+                    <button id="setNameBtn" class="btn btn-primary">Continue</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Menu Screen -->
+        <div id="menuScreen" class="screen">
+            <div class="card">
+                <h2>Welcome, <span id="displayName"></span>!</h2>
+                <div class="menu-options">
+                    <button id="createRoomBtn" class="btn btn-primary">
+                        <span class="btn-icon">🏠</span>
+                        Create Room
+                    </button>
+                    <button id="joinRoomBtn" class="btn btn-secondary">
+                        <span class="btn-icon">🚪</span>
+                        Join Room
+                    </button>
+                    <button id="randomGameBtn" class="btn btn-accent">
+                        <span class="btn-icon">🎲</span>
+                        Random Match
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Join Room Screen -->
+        <div id="joinScreen" class="screen">
+            <div class="card">
+                <h2>Join Room</h2>
+                <div class="input-group">
+                    <input type="text" id="roomIdInput" placeholder="Enter room ID..." maxlength="8">
+                    <button id="joinBtn" class="btn btn-primary">Join</button>
+                </div>
+                <button id="backToMenuBtn" class="btn btn-ghost">Back to Menu</button>
+            </div>
+        </div>
+
+        <!-- Waiting Screen -->
+        <div id="waitingScreen" class="screen">
+            <div class="card">
+                <h2>Waiting for Opponent...</h2>
+                <div class="loading-spinner"></div>
+                <p>Room ID: <span id="waitingRoomId" class="room-id"></span></p>
+                <p class="share-text">Share this room ID with your friend!</p>
+                <button id="cancelWaitBtn" class="btn btn-ghost">Cancel</button>
+            </div>
+        </div>
+
+        <!-- Game Screen -->
+        <div id="gameScreen" class="screen">
+            <div class="game-info">
+                <div class="players-info">
+                    <div class="player-card" id="player1">
+                        <span class="player-symbol">X</span>
+                        <span class="player-name">Player 1</span>
+                    </div>
+                    <div class="vs">VS</div>
+                    <div class="player-card" id="player2">
+                        <span class="player-symbol">O</span>
+                        <span class="player-name">Player 2</span>
+                    </div>
+                </div>
+                <div class="game-status">
+                    <p id="currentTurn">Waiting for game to start...</p>
+                    <p class="room-info">Room: <span id="gameRoomId"></span></p>
+                </div>
+            </div>
+
+            <div class="game-board" id="gameBoard">
+                <div class="cell" data-index="0"></div>
+                <div class="cell" data-index="1"></div>
+                <div class="cell" data-index="2"></div>
+                <div class="cell" data-index="3"></div>
+                <div class="cell" data-index="4"></div>
+                <div class="cell" data-index="5"></div>
+                <div class="cell" data-index="6"></div>
+                <div class="cell" data-index="7"></div>
+                <div class="cell" data-index="8"></div>
+            </div>
+
+            <div class="game-controls">
+                <button id="resetBtn" class="btn btn-secondary">New Game</button>
+                <button id="leaveGameBtn" class="btn btn-ghost">Leave Game</button>
+            </div>
+        </div>
+
+        <!-- Toast Notifications -->
+        <div id="toast" class="toast"></div>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>
